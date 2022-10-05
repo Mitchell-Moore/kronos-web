@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { base_url } from '../utils/constanst';
+import { base_url } from '../utils/constants';
 
 export interface User {
   id: number;
@@ -17,9 +17,9 @@ export const login = async (data: { email: string; password: string }) => {
     const response = await axios.post(base_url + 'api/auth/login', data, {
       withCredentials: true,
     });
-    console.log(response.headers.cookie);
 
-    console.log(response);
+    console.log(response.data.data);
+
     return response;
   } catch (e) {
     console.log(e);
