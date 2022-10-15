@@ -12,16 +12,31 @@ const setAccessToken = (token: string) => {
   localStorage.setItem('accessToken', token);
 };
 
+const setUser = (user: User) => {
+  localStorage.setItem('loggedInUser', JSON.stringify(user));
+};
+
+const getAccessToken = (): string | null => {
+  return localStorage.getItem('accessToken');
+};
+
+const getUser = (): User | null => {
+  const user = localStorage.getItem('loggedInUser');
+  if (user) {
+    return JSON.parse(user);
+  }
+  return null;
+};
+
 export const login = async (data: { email: string; password: string }) => {
   try {
     const response = await axios.post(base_url + 'api/auth/login', data, {
       withCredentials: true,
     });
-
-    console.log(response.data.data);
-
-    return response;
+    setAccessToken(response.data.token);
+    setUser(response.data.user);
+    return { data: response.data, error: null };
   } catch (e) {
-    console.log(e);
+    return { data: null, error: e };
   }
 };

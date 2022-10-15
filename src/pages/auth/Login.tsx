@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { login } from '../../api/user';
+import { useNavigate } from 'react-router-dom';
 
 interface LoginProps {}
 
@@ -7,11 +8,15 @@ const Login: React.FC = (props: LoginProps) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const submit = async () => {
     setIsLoading(true);
-    const response = await login({ email, password });
-    console.log(response);
+    const { data, error } = await login({ email, password });
+    if (data) {
+      navigate('/availability');
+    }
+    console.log('here: ', data);
     setIsLoading(false);
   };
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 interface HomeProps {}
 
@@ -9,7 +9,7 @@ const Home: React.FC = (props: HomeProps) => {
       <a href="/login">Login</a>
       <a href="/register">Sign Up</a>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
