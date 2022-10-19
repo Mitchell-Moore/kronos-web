@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
+import TimeInput from '../../components/TimeInput';
 
 interface AvailabilityProps {}
 
 const Availability: React.FC = (props: AvailabilityProps) => {
   const [isLoading, setIsLoading] = useState(false);
-
+  const emptyState = '--';
   const [form, setForm] = useState({
-    monday: { startTime: '- -', endTime: '- -' },
-    tuesday: { startTime: '- -', endTime: '- -' },
-    wednesday: { startTime: '- -', endTime: '- -' },
-    thursday: { startTime: '- -', endTime: '- -' },
-    friday: { startTime: '- -', endTime: '- -' },
-    saturday: { startTime: '- -', endTime: '- -' },
-    sunday: { startTime: '- -', endTime: '- -' },
+    monday: { startTime: emptyState, endTime: emptyState },
+    tuesday: { startTime: emptyState, endTime: emptyState },
+    wednesday: { startTime: emptyState, endTime: emptyState },
+    thursday: { startTime: emptyState, endTime: emptyState },
+    friday: { startTime: emptyState, endTime: emptyState },
+    saturday: { startTime: emptyState, endTime: emptyState },
+    sunday: { startTime: emptyState, endTime: emptyState },
   });
 
   const submit = async () => {
@@ -37,13 +38,7 @@ const Availability: React.FC = (props: AvailabilityProps) => {
         >
           <div className="flex flex-col">
             <label htmlFor="email">Monday</label>
-            <input
-              type="time"
-              value={form.monday.startTime}
-              required
-              className=" border-black border rounded"
-              id="email"
-            />
+            <TimeInput dateTime={null}></TimeInput>
           </div>
           {/* 
           <div className="flex flex-col pb-2">

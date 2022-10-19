@@ -15,11 +15,11 @@ function TimeInput(props: TimeInputProps) {
     am_pm = props.dateTime.getHours() >= 12 ? 'pm' : 'am';
   }
 
+  const times = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   /**
    * TODO:
    *    1. Add Split button for AM PM
    *        a. How do you do if statements in code???
-   *    2. Find way to do an option for loop for 1 - 12
    *    3. How do you emit values to parent during submit??
    *
    */
@@ -30,18 +30,26 @@ function TimeInput(props: TimeInputProps) {
         <label htmlFor="hour">Hour</label>
         <select name="hour" id="hour" value={hour}>
           <option value="--">--</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
+          {times.map((value, index) => {
+            return (
+              <option value={value} key={index}>
+                {value}
+              </option>
+            );
+          })}
         </select>
       </div>
       <div>
         <label htmlFor="minute">Minute</label>
         <select name="minute" id="minute" value={minute}>
           <option value="--">--</option>
-          <option value="1">1</option>
+          {times.map((value, index) => {
+            return (
+              <option value={value} key={index}>
+                {value}
+              </option>
+            );
+          })}
         </select>
       </div>
       <div>
