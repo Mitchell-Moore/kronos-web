@@ -26,14 +26,14 @@ const PublicHeader: React.FC = (props: PublicHeaderProps) => {
     </ul> */}
       <div>
         <a
-          href="#"
+          href="/login"
           className="text-slate-500 hover:text-slate-900 font-semibold"
         >
           Login
         </a>
         <a
           className="inline-flex justify-center rounded-lg text-sm font-semibold py-2.5 px-4 bg-slate-900 text-white hover:bg-slate-700 -my-2.5 ml-8"
-          href="#"
+          href="/registration"
         >
           <span>Get Started &nbsp;</span>
           <span aria-hidden="true" className="text-white sm:inline">
