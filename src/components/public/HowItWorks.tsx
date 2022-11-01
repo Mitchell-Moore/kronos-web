@@ -6,21 +6,21 @@ const HowItWorksImages = (props: { activeStep: string }) => {
   if (props.activeStep === 'setAvailability') {
     return (
       <img
-        src="../../../public/images/SetAvailability.png"
+        src="../../../images/SetAvailability.png"
         alt="Set availability calendar, days of the week enter start and end time"
       />
     );
   } else if (props.activeStep === 'shareLink') {
     return (
       <img
-        src="../../../public/images/Link.png"
+        src="../../../images/Link.png"
         alt="Set availability calendar, days of the week enter start and end time"
       />
     );
   }
   return (
     <img
-      src="../../../public/images/Meeting.png"
+      src="../../../images/Meeting.png"
       alt="Calendar with availability showing"
       v-if="activeStep === 'meeting'"
       className="ml-4 w-72 h-72"
