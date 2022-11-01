@@ -1,4 +1,5 @@
 import React from 'react';
+import Footer from '../components/public/Footer';
 import Hero from '../components/public/Hero';
 import HowItWorks from '../components/public/HowItWorks';
 import PublicHeader from '../components/public/PublicHeader';
@@ -19,6 +20,7 @@ const Landing: React.FC = (props: LandingProps) => {
       <div className="container mx-auto pt-12">
         <Testimonials />
       </div>
+      <Footer />
     </>
   );
 };
