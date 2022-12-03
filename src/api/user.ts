@@ -28,13 +28,40 @@ const getUser = (): User | null => {
   return null;
 };
 
+const isLoggedIn = (): boolean => {
+  const user = getUser();
+  if (user) {
+    return true;
+  }
+  return false;
+};
+
 export const login = async (data: { email: string; password: string }) => {
   try {
     const response = await axios.post(base_url + 'api/auth/login', data, {
-      withCredentials: true,
+      withCredentials: false,
     });
     setAccessToken(response.data.token);
     setUser(response.data.user);
+    return { data: response.data, error: null };
+  } catch (e) {
+    return { data: null, error: e };
+  }
+};
+
+interface registerProps {
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  userName: string;
+}
+
+export const register = async (data: registerProps) => {
+  try {
+    const response = await axios.post(base_url + 'api/auth/register', data, {
+      withCredentials: false,
+    });
     return { data: response.data, error: null };
   } catch (e) {
     return { data: null, error: e };
