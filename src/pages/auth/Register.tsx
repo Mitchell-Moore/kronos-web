@@ -20,7 +20,7 @@ const Register: React.FC<RegisterProps> = (props) => {
     setIsLoading(true);
     const { data, error } = await register(formData);
     if (data) {
-      navigate('/availability');
+      navigate('/login');
     }
     setIsLoading(false);
   };
