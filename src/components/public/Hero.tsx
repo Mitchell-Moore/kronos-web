@@ -2,7 +2,7 @@ import * as React from 'react';
 
 export interface HeroProps {}
 
-const Hero: React.FC = (props: HeroProps) => {
+const Hero: React.FC<HeroProps> = (props) => {
   return (
     <div className="mx-auto text-center max-w-container px-4 pt-12 lg:px-8">
       <div className="relative z-20 mx-auto pb-16 pt-16 lg:w-[60rem]">

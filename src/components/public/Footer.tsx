@@ -2,7 +2,7 @@ import * as React from 'react';
 
 export interface FooterProps {}
 
-const Footer: React.FC = (props: FooterProps) => {
+const Footer: React.FC<FooterProps> = (props) => {
   return (
     <footer className="mt-8">
       <div className="border-t border-slate-900/5 py-10">

@@ -2,7 +2,7 @@ import * as React from 'react';
 
 export interface ValuePropsProps {}
 
-const ValueProps: React.FC = (props: ValuePropsProps) => {
+const ValueProps: React.FC<ValuePropsProps> = (props) => {
   return (
     <div className="flex flex-col md:flex-row w-full items-center md:items-start text-center md:text-left md:justify-around">
       <div className="max-w-[20rem] w-full rounded-lg flex flex-row p-4 lg:p-0">

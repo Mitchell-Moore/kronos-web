@@ -5,7 +5,7 @@ import PublicHeader from '../../components/public/PublicHeader';
 
 interface LoginProps {}
 
-const Login: React.FC = (props: LoginProps) => {
+const Login: React.FC<LoginProps> = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);

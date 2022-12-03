@@ -2,7 +2,7 @@ import * as React from 'react';
 
 export interface TestimonialsProps {}
 
-const Testimonials: React.FC = (props: TestimonialsProps) => {
+const Testimonials: React.FC<TestimonialsProps> = (props) => {
   return (
     <div className="px-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 text-slate-700">
       <div className="w-full h-72 xl:h-64 rounded-2xl bg-slate-100 shadow p-8">

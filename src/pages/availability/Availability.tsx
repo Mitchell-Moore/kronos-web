@@ -3,7 +3,7 @@ import TimeInput from '../../components/TimeInput';
 
 interface AvailabilityProps {}
 
-const Availability: React.FC = (props: AvailabilityProps) => {
+const Availability: React.FC<AvailabilityProps> = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const emptyState = '--';
   const [form, setForm] = useState({

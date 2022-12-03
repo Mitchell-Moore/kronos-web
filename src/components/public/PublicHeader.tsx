@@ -2,7 +2,7 @@ import React from 'react';
 
 interface PublicHeaderProps {}
 
-const PublicHeader: React.FC = (props: PublicHeaderProps) => {
+const PublicHeader: React.FC<PublicHeaderProps> = (props) => {
   // const links = ['']
   return (
     <header className="flex items-center justify-between py-7 mx-auto bg-white px-5 w-full absolute top-0 left-0">

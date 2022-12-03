@@ -28,7 +28,7 @@ const HowItWorksImages = (props: { activeStep: string }) => {
   );
 };
 
-const HowItWorks: React.FC = (props: HowItWorksProps) => {
+const HowItWorks: React.FC<HowItWorksProps> = (props) => {
   const [activeStep, setActiveStep] = useState('setAvailability');
   return (
     <div className="justify-center w-full bg-slate-100 text-black py-12 mt-24">

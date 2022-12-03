@@ -8,7 +8,7 @@ import ValueProps from '../components/public/ValueProps';
 
 interface LandingProps {}
 
-const Landing: React.FC = (props: LandingProps) => {
+const Landing: React.FC<LandingProps> = (props) => {
   return (
     <>
       <div className="container mx-auto">

@@ -4,7 +4,7 @@ interface TimeInputProps {
   dateTime: Date | null;
 }
 
-function TimeInput(props: TimeInputProps) {
+const TimeInput: React.FC<TimeInputProps> = (props) => {
   let hour = '--';
   let minute = '--';
   let am_pm = 'am';
@@ -57,6 +57,6 @@ function TimeInput(props: TimeInputProps) {
       </div>
     </div>
   );
-}
+};
 
 export default TimeInput;
