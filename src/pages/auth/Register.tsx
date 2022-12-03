@@ -44,7 +44,7 @@ const Register: React.FC<RegisterProps> = (props) => {
           <div className="flex flex-col">
             <label htmlFor="email">First Name</label>
             <input
-              type="email"
+              type="text"
               value={formData.firstName}
               onChange={(e) =>
                 setFormData({ ...formData, firstName: e.target.value })
@@ -57,7 +57,7 @@ const Register: React.FC<RegisterProps> = (props) => {
           <div className="flex flex-col">
             <label htmlFor="email">Last Name</label>
             <input
-              type="email"
+              type="text"
               value={formData.lastName}
               onChange={(e) =>
                 setFormData({ ...formData, lastName: e.target.value })
@@ -70,7 +70,7 @@ const Register: React.FC<RegisterProps> = (props) => {
           <div className="flex flex-col">
             <label htmlFor="email">Username</label>
             <input
-              type="email"
+              type="text"
               value={formData.userName}
               onChange={(e) =>
                 setFormData({ ...formData, userName: e.target.value })
