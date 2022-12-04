@@ -3,6 +3,7 @@ import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import Landing from './pages/Landing';
 import Availability from './pages/availability/Availability';
+import AuthLayout from './components/layout/AuthLayout';
 
 function App() {
   return (
@@ -11,7 +12,9 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Register />} />
-        <Route path="/availability" element={<Availability />} />
+        <Route element={<AuthLayout />}>
+          <Route path="/availability" element={<Availability />} />
+        </Route>
       </Routes>
     </div>
   );

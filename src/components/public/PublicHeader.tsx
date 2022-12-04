@@ -3,27 +3,11 @@ import React from 'react';
 interface PublicHeaderProps {}
 
 const PublicHeader: React.FC<PublicHeaderProps> = (props) => {
-  // const links = ['']
   return (
     <header className="flex items-center justify-between py-7 mx-auto bg-white px-5 w-full absolute top-0 left-0">
-      <a>
+      <a href="/">
         <div className="font-bold text-2xl text-black">Kronos</div>
       </a>
-      {/* <ul className="hidden lg:flex flex-row justify-between space-x-14">
-      <li
-        className="group"
-        :className="{ 'text-slate-500': activeLink !== link }"
-        v-for="link in links"
-        :key="link"
-        @click="() => (activeLink = link)"
-      >
-        <a
-          to="#"
-          className="font-medium group-hover:text-slate-900 transition-all duration-300"
-          >{{ link }}</a
-        >
-      </li>
-    </ul> */}
       <div>
         <a
           href="/login"

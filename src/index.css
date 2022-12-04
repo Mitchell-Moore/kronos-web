@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.auth-container {
+  @apply w-full pl-0 md:pl-56;
+}
