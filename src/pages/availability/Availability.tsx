@@ -6,15 +6,10 @@ interface AvailabilityProps {}
 const Availability: React.FC<AvailabilityProps> = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const emptyState = '--';
-  const [form, setForm] = useState({
-    monday: { startTime: emptyState, endTime: emptyState },
-    tuesday: { startTime: emptyState, endTime: emptyState },
-    wednesday: { startTime: emptyState, endTime: emptyState },
-    thursday: { startTime: emptyState, endTime: emptyState },
-    friday: { startTime: emptyState, endTime: emptyState },
-    saturday: { startTime: emptyState, endTime: emptyState },
-    sunday: { startTime: emptyState, endTime: emptyState },
-  });
+  const [formData, setFormData] = useState([
+    { day: 'Monday', startTime: null, endTime: null },
+    { day: 'Tuesday', startTime: null, endTime: null },
+  ]);
 
   const submit = async () => {
     setIsLoading(true);
@@ -22,10 +17,11 @@ const Availability: React.FC<AvailabilityProps> = (props) => {
   };
 
   return (
-    <div>
-      <div className="text-xl font-bold">Availability</div>
-      <a href="/login">Login</a>
-      <a href="/register">Sign Up</a>
+    <div className="w-full p-16">
+      <div className="text-3xl font-bold text-slate-700">Availability</div>
+      <span className="text-lg font-semibold">
+        Enter when you would like to be available to book!
+      </span>
 
       <div>
         <form
@@ -36,22 +32,15 @@ const Availability: React.FC<AvailabilityProps> = (props) => {
             submit();
           }}
         >
-          <div className="flex flex-col">
-            <label htmlFor="email">Monday</label>
-            <TimeInput dateTime={null}></TimeInput>
-          </div>
-          {/* 
-          <div className="flex flex-col pb-2">
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              className=" border-black border rounded"
-              id="password"
-            />
-          </div> */}
+          {formData.map((value, index) => {
+            return (
+              <div className="flex flex-col" key={index}>
+                <label htmlFor="email">{value.day}</label>
+                <TimeInput dateTime={value.startTime}></TimeInput>
+                <TimeInput dateTime={value.endTime}></TimeInput>
+              </div>
+            );
+          })}
 
           <button
             type="submit"
