@@ -27,6 +27,15 @@ const TimeInput: React.FC<TimeInputProps> = (props) => {
       : '5:00 PM'
   );
 
+  const [showTimes, setShowTimes] = useState(!!props.startTime);
+
+  if (!showTimes) {
+    return (
+      <div className="cursor-pointer" onClick={() => setShowTimes(true)}>
+        +
+      </div>
+    );
+  }
   return (
     <div className="flex flex-row">
       <div>
@@ -60,8 +69,8 @@ const TimeInput: React.FC<TimeInputProps> = (props) => {
           })}
         </select>
       </div>
-      <div>
-        <div></div>
+      <div className=" cursor-pointer" onClick={() => setShowTimes(false)}>
+        X
       </div>
     </div>
   );
