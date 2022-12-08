@@ -16,6 +16,21 @@ const Availability: React.FC<AvailabilityProps> = (props) => {
     setIsLoading(false);
   };
 
+  let defaultTimes: string[] = [];
+  let curTime = new Date();
+  curTime.setHours(0, 0, 0, 0);
+  let endTime = new Date();
+  endTime.setHours(23, 59, 0, 0);
+  while (endTime > curTime) {
+    defaultTimes.push(
+      curTime.toLocaleString('en-US', {
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: true,
+      })
+    );
+    curTime = new Date(curTime.getTime() + 15 * 60000);
+  }
   return (
     <div className="w-full p-16">
       <div className="text-3xl font-bold text-slate-700">Availability</div>
@@ -36,8 +51,11 @@ const Availability: React.FC<AvailabilityProps> = (props) => {
             return (
               <div className="flex flex-col" key={index}>
                 <label htmlFor="email">{value.day}</label>
-                <TimeInput dateTime={value.startTime}></TimeInput>
-                <TimeInput dateTime={value.endTime}></TimeInput>
+                <TimeInput
+                  startTime={value.startTime}
+                  endTime={value.endTime}
+                  times={defaultTimes}
+                ></TimeInput>
               </div>
             );
           })}

@@ -1,36 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 interface TimeInputProps {
-  dateTime: Date | null;
+  startTime: Date | null;
+  endTime: Date | null;
+  times: string[];
 }
 
 const TimeInput: React.FC<TimeInputProps> = (props) => {
-  let hour = '--';
-  let minute = '--';
-  let am_pm = 'am';
+  const [selectedStartTime, setSelectedStartTime] = useState(
+    props.startTime !== null
+      ? props.startTime.toLocaleString('en-US', {
+          hour: 'numeric',
+          minute: 'numeric',
+          hour12: true,
+        })
+      : '9:00 AM'
+  );
 
-  if (props.dateTime) {
-    hour = (props.dateTime.getHours() % 12).toString();
-    minute = props.dateTime.getMinutes().toString();
-    am_pm = props.dateTime.getHours() >= 12 ? 'pm' : 'am';
-  }
-
-  const times = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-  /**
-   * TODO:
-   *    1. Add Split button for AM PM
-   *        a. How do you do if statements in code???
-   *    3. How do you emit values to parent during submit??
-   *
-   */
+  const [selectedEndTime, setSelectedEndTime] = useState(
+    props.endTime !== null
+      ? props.endTime.toLocaleString('en-US', {
+          hour: 'numeric',
+          minute: 'numeric',
+          hour12: true,
+        })
+      : '5:00 PM'
+  );
 
   return (
     <div className="flex flex-row">
       <div>
-        <label htmlFor="hour">Hour</label>
-        <select name="hour" id="hour" value={hour}>
-          <option value="--">--</option>
-          {times.map((value, index) => {
+        <select
+          name="start"
+          id="start"
+          value={selectedStartTime}
+          onChange={(e) => setSelectedStartTime(e.target.value)}
+        >
+          {props.times.map((value, index) => {
             return (
               <option value={value} key={index}>
                 {value}
@@ -38,12 +44,14 @@ const TimeInput: React.FC<TimeInputProps> = (props) => {
             );
           })}
         </select>
-      </div>
-      <div>
-        <label htmlFor="minute">Minute</label>
-        <select name="minute" id="minute" value={minute}>
-          <option value="--">--</option>
-          {times.map((value, index) => {
+        -
+        <select
+          name="end"
+          id="end"
+          value={selectedEndTime}
+          onChange={(e) => setSelectedEndTime(e.target.value)}
+        >
+          {props.times.map((value, index) => {
             return (
               <option value={value} key={index}>
                 {value}
