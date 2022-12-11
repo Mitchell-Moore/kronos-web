@@ -16,19 +16,27 @@ const setUser = (user: User) => {
   localStorage.setItem('loggedInUser', JSON.stringify(user));
 };
 
-const getAccessToken = (): string | null => {
+export const getAccessToken = (): string | null => {
   return localStorage.getItem('accessToken');
 };
 
-const getUser = (): User | null => {
+export const getAuthHeader = (): string => {
+  return getAccessToken()!!!;
+};
+
+export const getUser = (): User | null => {
   const user = localStorage.getItem('loggedInUser');
+  console.log('here', user);
+  console.log(typeof user);
+
   if (user) {
+    console.log(user);
     return JSON.parse(user);
   }
   return null;
 };
 
-const isLoggedIn = (): boolean => {
+export const isLoggedIn = (): boolean => {
   const user = getUser();
   if (user) {
     return true;
@@ -41,8 +49,9 @@ export const login = async (data: { email: string; password: string }) => {
     const response = await axios.post(base_url + 'api/auth/login', data, {
       withCredentials: false,
     });
+    console.log(response);
     setAccessToken(response.data.token);
-    setUser(response.data.user);
+    setUser(response.data.data);
     return { data: response.data, error: null };
   } catch (e) {
     return { data: null, error: e };

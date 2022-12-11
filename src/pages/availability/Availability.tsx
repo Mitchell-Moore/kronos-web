@@ -1,35 +1,51 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { getUserSchedules } from '../../api/schedule';
+import { getUser } from '../../api/user';
 import TimeInput from '../../components/TimeInput';
 
 interface AvailabilityProps {}
 
 const Availability: React.FC<AvailabilityProps> = (props) => {
   const [isLoading, setIsLoading] = useState(false);
-  const emptyState = '--';
+  const [schedules, setSchedules] = useState();
+
   const [formData, setFormData] = useState([
     { day: 'Monday', startTime: null, endTime: null },
     { day: 'Tuesday', startTime: null, endTime: null },
+    { day: 'Wednesday', startTime: null, endTime: null },
+    { day: 'Thursday', startTime: null, endTime: null },
+    { day: 'Friday', startTime: null, endTime: null },
+    { day: 'Saturday', startTime: null, endTime: null },
+    { day: 'Sunday', startTime: null, endTime: null },
   ]);
+
+  const defaultTimes: string[] = getDefaultTimes();
 
   const submit = async () => {
     setIsLoading(true);
     setIsLoading(false);
   };
 
-  let defaultTimes: string[] = [];
-  let curTime = new Date();
-  curTime.setHours(0, 0, 0, 0);
-  let endTime = new Date();
-  endTime.setHours(23, 59, 0, 0);
-  while (endTime > curTime) {
-    defaultTimes.push(
-      curTime.toLocaleString('en-US', {
-        hour: 'numeric',
-        minute: 'numeric',
-        hour12: true,
+  const user = getUser();
+  if (!user) {
+    return <div>fml</div>;
+  }
+
+  useEffect(() => {
+    setIsLoading(true);
+    getUserSchedules(user.id)
+      .then((response) => {
+        setIsLoading(false);
+        console.log(response);
       })
-    );
-    curTime = new Date(curTime.getTime() + 15 * 60000);
+      .catch((error) => {
+        setIsLoading(false);
+        console.log(error);
+      });
+  }, []);
+
+  if (isLoading) {
+    return <div>Is Loading</div>;
   }
   return (
     <div className="w-full p-16">
@@ -70,6 +86,25 @@ const Availability: React.FC<AvailabilityProps> = (props) => {
       </div>
     </div>
   );
+};
+
+const getDefaultTimes = (): string[] => {
+  let defaultTimes: string[] = [];
+  let curTime = new Date();
+  curTime.setHours(0, 0, 0, 0);
+  let endTime = new Date();
+  endTime.setHours(23, 59, 0, 0);
+  while (endTime > curTime) {
+    defaultTimes.push(
+      curTime.toLocaleString('en-US', {
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: true,
+      })
+    );
+    curTime = new Date(curTime.getTime() + 15 * 60000);
+  }
+  return defaultTimes;
 };
 
 export default Availability;
