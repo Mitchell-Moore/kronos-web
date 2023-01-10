@@ -24,16 +24,13 @@ export const getAuthHeader = (): string => {
   return getAccessToken()!!!;
 };
 
-export const getUser = (): User | null => {
+export const getUser = (): User => {
   const user = localStorage.getItem('loggedInUser');
-  console.log('here', user);
-  console.log(typeof user);
 
-  if (user) {
-    console.log(user);
-    return JSON.parse(user);
+  if (!user) {
+    throw new Error('User does not exist');
   }
-  return null;
+  return JSON.parse(user);
 };
 
 export const isLoggedIn = (): boolean => {
@@ -49,7 +46,6 @@ export const login = async (data: { email: string; password: string }) => {
     const response = await axios.post(base_url + 'api/auth/login', data, {
       withCredentials: false,
     });
-    console.log(response);
     setAccessToken(response.data.token);
     setUser(response.data.data);
     return { data: response.data, error: null };

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getUserSchedules } from '../../api/schedule';
+import { getUserSchedules, Schedule } from '../../api/schedule';
 import { getUser } from '../../api/user';
 import TimeInput from '../../components/TimeInput';
 
@@ -7,16 +7,16 @@ interface AvailabilityProps {}
 
 const Availability: React.FC<AvailabilityProps> = (props) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [schedules, setSchedules] = useState();
+  const [schedules, setSchedules] = useState<Schedule[]>([]);
 
   const [formData, setFormData] = useState([
-    { day: 'Monday', startTime: null, endTime: null },
-    { day: 'Tuesday', startTime: null, endTime: null },
-    { day: 'Wednesday', startTime: null, endTime: null },
-    { day: 'Thursday', startTime: null, endTime: null },
-    { day: 'Friday', startTime: null, endTime: null },
-    { day: 'Saturday', startTime: null, endTime: null },
-    { day: 'Sunday', startTime: null, endTime: null },
+    { dayOfWeek: 'Monday', startTime: null, endTime: null },
+    { dayOfWeek: 'Tuesday', startTime: null, endTime: null },
+    { dayOfWeek: 'Wednesday', startTime: null, endTime: null },
+    { dayOfWeek: 'Thursday', startTime: null, endTime: null },
+    { dayOfWeek: 'Friday', startTime: null, endTime: null },
+    { dayOfWeek: 'Saturday', startTime: null, endTime: null },
+    { dayOfWeek: 'Sunday', startTime: null, endTime: null },
   ]);
 
   const defaultTimes: string[] = getDefaultTimes();
@@ -35,12 +35,12 @@ const Availability: React.FC<AvailabilityProps> = (props) => {
     setIsLoading(true);
     getUserSchedules(user.id)
       .then((response) => {
+        console.log(response.data.data);
         setIsLoading(false);
-        console.log(response);
+        setSchedules(response.data.data);
       })
-      .catch((error) => {
+      .catch(() => {
         setIsLoading(false);
-        console.log(error);
       });
   }, []);
 
@@ -66,10 +66,12 @@ const Availability: React.FC<AvailabilityProps> = (props) => {
           {formData.map((value, index) => {
             return (
               <div className="flex flex-col" key={index}>
-                <label htmlFor="email">{value.day}</label>
+                <label htmlFor="email">{value.dayOfWeek}</label>
                 <TimeInput
-                  startTime={value.startTime}
-                  endTime={value.endTime}
+                  schedules={schedules.filter(
+                    (schedule) => schedule.dayOfWeek === value.dayOfWeek
+                  )}
+                  dayOfWeek={value.dayOfWeek}
                   times={defaultTimes}
                 ></TimeInput>
               </div>
