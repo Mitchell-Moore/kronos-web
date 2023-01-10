@@ -17,7 +17,6 @@ const Login: React.FC<LoginProps> = (props) => {
     if (data) {
       navigate('/availability');
     }
-    console.log('here: ', data);
     setIsLoading(false);
   };
 
